@@ -30,10 +30,13 @@ Se tomo la decision de usar VPC Enpoints que NAT Gateway por los costos, normalm
 
 ### Por qué ALB con Ingress y no Service LoadBalancer
 
+Porque permite manejar multiples rutas y servicios con un solo ALB, reduce costos. El service LoadBalancer crea un balanceador por cada servicio lo que lo convierte en algo mas costoso e inmanejable segun el caso, aparte el Ingress permite SSL/TLS
+
 ### Por qué Aurora PostgreSQL
 Se incorpora un a migracion del aplicativo de SQLite a Postgres en un RDS Aurora postgres, esto con el objetivo de segmentar y dejar al con su respectiva responsabilidad y evitar alguna perdida de datos el algun momento en la eliminacion de algun pod de SQL o algo por el estilo, con esto tambien se logra una arqutiectura mas robusca, escalable y mantenible, se toma esta decision como una mejora operativa para la solucion
 
 ### Por qué EKS con HPA
+Para el Escalado Horizontal automatico segun consumo de CPU y Memoria, sin necsidad de intervencion manual, esto permite que la aplicacion logre soportar tradfico creando mas pods y reducirlos cuando el trafico baja, optimizamos costos de esta manera
 
 ## Infraestructura (Terraform)
 
