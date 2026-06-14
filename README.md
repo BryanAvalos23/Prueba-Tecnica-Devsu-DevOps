@@ -170,6 +170,7 @@ kubectl describe deployment demo-app -n demo-app
 - Secrets Manager para manejo seguro de credenciales de base de datos
 - HPA configurado con métricas de CPU (70%) y memoria (80%)
 - VPC Endpoints para conectividad privada sin NAT Gateway
+- Dominio personalizado en Route 53 como zona hospedada traido desde GoDaddy
 
 ### Decisiones por limitaciones de tiempo
 - **Terraform** — la infraestructura se desplegó desde local, no se logró
