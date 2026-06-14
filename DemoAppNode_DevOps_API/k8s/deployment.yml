@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $(name)
+  namespace: $(namespace)
+  annotations:
+    description: "Despliegue en build $(Build.BuildId)"
+  labels:
+    app: $(name)
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: $(name)
+  template:
+    metadata:
+      labels:
+        app: $(name)
+    spec:
+      containers:
+        - name: $(name)
+          image: $(repository):latest
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          env:
+            - name: DB_SECRET_NAME
+              value: "$(DB_SECRET_NAME)"
+            - name: DATABASE_NAME
+              value: "$(DATABASE_NAME)"
+            - name: DATABASE_USER
+              value: "$(DATABASE_USER)"
+            - name: DATABASE_HOST
+              value: "$(DATABASE_HOST)"
+            - name: DATABASE_PORT
+              value: "$(DATABASE_PORT)"
+            - name: NODE_ENV
+              value: "$(NODE_ENV)"
+            - name: AWS_REGION
+              value: "$(AWS_REGION)"
+            - name: AWS_ACCESS_KEY_ID
+              value: "$(AWS_ACCESS_KEY_ID)"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "$(AWS_SECRET_ACCESS_KEY)"
